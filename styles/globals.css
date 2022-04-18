@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.question {
+	position: absolute;
+	width: 100%;
+	/* left: 45%; */
+	opacity: 0;
+	transition: opacity ease-in-out 0.4s;
+}
+
+.active-question {
+	opacity: 1;
+}
+
+.container-question {
+	position: relative;
+	max-width: 700px;
+	height: 500px;
+	margin: 1em auto 0;
+	overflow: hidden;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.answer-container {
+	width: 50%;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
