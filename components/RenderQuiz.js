@@ -1,63 +1,67 @@
 import React from "react";
 import { useState } from "react";
-import { questionToRender, answersToRender } from "../utils/questionsArray";
+import { selectedQuestions } from "../utils/questionsArray";
 
 export default function RenderQuiz() {
 	const [questionIndex, setQuestionIndex] = useState(1);
 	const [answerIndex, setAnswerIndex] = useState(1);
 	const [score, setScore] = useState(0);
 
-	let quizOver = false;
+	const [quizState, setQuizState] = useState(false)
 
 	const nextQuestion = () => {
-		if (questionIndex !== questionToRender.length) {
+		if (questionIndex !== selectedQuestions.length) {
 			setQuestionIndex(questionIndex + 1);
 			setAnswerIndex(answerIndex + 1);
-		} else {
-			quizOver = true;
+		} else if (quizState == false){
+			setQuizState((prevState) => !prevState)
+			document.getElementById('trueButton').disable = true;
 		}
 	};
 
 	const answerSubmit = (e) => {
 		if (e.target.textContent == "True Value") {
-			if (quizOver === true) {
+			if (quizState === true) {
 				console.log("Thanks for playing!");
-			} else if (score < questionToRender.length) {
+			} else {
 				setScore(score + 1);
+				nextQuestion()
 			}
 		} else {
 			nextQuestion();
 		}
-		nextQuestion();
-	};
+	};	
 
 	return (
-		<div className="container-question">
-			<p className="p-3">{`Question ${questionIndex} of 10`}</p>
-			{Array.from(questionToRender).map((q, i) => {
-				return (
-					<div key={i} className={questionIndex === i + 1 ? "question active-question" : "question"}>
-						<h2 className="py-8 text-center">{q}</h2>
-					</div>
-				);
-			})}
-			{Array.from(answersToRender).map((a, i) => {
-				return (
-					<div key={i} className={answerIndex === i + 1 ? "question active-question" : "question"}>
-						<div className="mt-40 text-center answer-container">
-							<h2 className="" key={i}>
-								{a}
-							</h2>
+		<div className="container-question text-center">
+			<p className="m-3 mt-20 text-center">{`Question ${questionIndex} of 10`}</p>
+			<p className="mt-5">Current score: {score}/10</p>
+			<div className="relative">
+				{Array.from(selectedQuestions).map((q, i) => {
+					return (
+						<div className="text-center">
+							<div key={i} className={questionIndex === i + 1 ? "question active-question" : "question"}>
+								<h2 className="mt-16">
+									{q.question}
+								</h2>
+							</div>
+							<div key={i} className={answerIndex === i + 1 ? "question active-question" : "question"}>
+								<h2 className="blur hover:blur-none mt-16 answer-container m-auto" key={i}>
+									<p>{q.answer}</p>
+								</h2>
+							</div>
 						</div>
-					</div>
-				);
-			})}
-			<button className="mt-60 block" value={true} onClick={answerSubmit}>
-				True Value
-			</button>
-			<button className="mt-10 block" value={false} onClick={answerSubmit}>
-				False Value
-			</button>
+					);
+				})}
+			</div>
+			<div className="mt-40">
+				<button id="trueButton" className="px-3" value={true} onClick={answerSubmit}>
+					True Value
+				</button>
+				<button id="falseButton" className="px-3" value={false} onClick={answerSubmit}>
+					False Value
+				</button>
+			</div>
 		</div>
 	);
 }
