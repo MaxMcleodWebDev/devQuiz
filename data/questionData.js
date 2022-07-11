@@ -1,64 +1,317 @@
 export const questionData = [
 	{
-		question: "What the fuck does .map do?",
-		answer: "Iterates over every element of an array in order.",
-		// response: true,
+		question: "What does .map do?",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 2",
-		answer: "answer 2",
-		// response: true,
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 3",
-		answer: "answer 3",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 4",
-		answer: "answer 4",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 5",
-		answer: "answer 5",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 6",
-		answer: "answer 6",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 7",
-		answer: "answer 7",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 8",
-		answer: "answer 8",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 9",
-		answer: "answer 9",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 10",
-		answer: "answer 10",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 11",
-		answer: "answer 11",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 12",
-		answer: "answer 12",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 13",
-		answer: "answer 13",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 14",
-		answer: "answer 14",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 	{
 		question: "question 15",
-		answer: "answer 15",
+		answers: [
+			{
+				answer: "This is the correct answer",
+				value: true
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+			{
+				answer: 'This is an incorrect answer',
+				value: false
+			},
+		] 
 	},
 ];

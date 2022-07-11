@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react"
 import questionToRender from "../utils/questionsArray";
 import { questionData } from "../data/questionData";
+import { selectedQuestions } from "../utils/questionsArray";
 
 export default function test() {
 
@@ -57,14 +58,13 @@ export default function test() {
 
 	return (
 		<div className="container-question">
-			{/* {Array.from(quizArray).map((q, i) => {
-				return (
-					<div key={i} className={questionIndex === i + 1 ? "question active-question flex justify-center" : "question"}>
-						<h2>{q.question}</h2>
-						<button className="block m-40" onClick={nextQuestion}>Next Question</button>
-					</div>
-				)
-			})} */}
+			<div className="answer-container">
+				{Array.from(selectedQuestions).map((q, i) => {
+					<p>
+						{q.answers[0].answer}
+					</p>
+				})}
+			</div>
 		</div>
     );
 }
