@@ -1,9 +1,11 @@
 import { questionData } from "../data/questionData";
+import { supabase } from "./supabaseClient";
 
 let remianingQuestions = [...questionData]
 let selectedQuestions = []
 
-const createQuiz = () => {
+function createQuiz()  {
+
 	for(let i = 0; i < 10; i++){
 		// Generate random index
 		   let randomIndex = Math.floor(Math.random() * remianingQuestions.length)

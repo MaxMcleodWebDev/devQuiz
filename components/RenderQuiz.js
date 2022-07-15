@@ -1,27 +1,51 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { questionData } from "../data/questionData";
 import { selectedQuestions } from "../utils/questionsArray";
 
-export default function RenderQuiz() {
-
-	console.log(selectedQuestions[0].answers);
+export default function RenderQuiz({ questions }) {
 
 	const [questionIndex, setQuestionIndex] = useState(0);
-	const [answerIndex, setAnswerIndex] = useState(0);
 	const [score, setScore] = useState(0);
-
 	const [quizState, setQuizState] = useState(false)
+
+	let remainingQuestions = [...questions]
 
 	const quizStart = () => {
 		const quizContainer = document.getElementById('quiz-container')
 		const startButton = document.getElementById('start-btn')
 		startButton.classList.add('hidden')
 		quizContainer.classList.remove('hidden')
-		setNextQuestion()
+		createQuiz()
 	}
 
-	const setNextQuestion = () => {
+	const createQuiz = () => {
+
+		let selectedQuestions = []
+
+		for (let i = 0; i < 10; i++) {
+			// Generate random index
+			let randomIndex = Math.floor(Math.random() * remainingQuestions.length)
+			// Add question to selected questions array
+			selectedQuestions.push(remainingQuestions[randomIndex])
+			// Remove question from remaining questions array to avoid duplication
+			remainingQuestions.splice(randomIndex, 1)
+		}
+
+		nextQuestion(selectedQuestions)
+	}
+
+	const nextQuestion = (question) => {
+
 		resetState()
+		if (questionIndex !== question.length) {
+			setQuestionIndex(questionIndex + 1)
+		} else if (quizState == false) {
+			console.log('hello');
+			setQuizState((prevState) => !prevState)
+			document.getElementById('next-btn').disable = true
+		}
+
 		showQuestion(selectedQuestions[questionIndex])
 	}
 
@@ -34,7 +58,7 @@ export default function RenderQuiz() {
 			button.innerText = answer.answer
 			button.classList.add('btn')
 			if (answer.value) {
-				button.dataset.value = answer.value
+				button.value = answer.value
 			}
 			button.addEventListener('click', selectAnswer)
 			buttonContainer.appendChild(button)
@@ -51,7 +75,28 @@ export default function RenderQuiz() {
 	}
 
 	const selectAnswer = (e) => {
-		console.log('I am button!')
+
+		const nextBtn = document.getElementById('next-btn')
+
+		// if (e.target.value) {
+		// 	if (quizState == true) {
+		// 		console.log('thanks for playing')
+		// 	} else {
+		// 		setScore(score + 1)
+		// 	}
+		// } else {
+		// 	console.log('Wrong answer!')
+		// }
+
+		if (e.target.value) {
+			console.log('I am the right answer')
+			setScore(score + 1)
+		} else {
+			console.log('I am not the right answer')
+		}
+
+		nextBtn.classList.remove('hidden')
+
 	}
 
 	// const nextQuestion = () => {
@@ -95,7 +140,7 @@ export default function RenderQuiz() {
 					</div>
 				</div>
 				<div className="mt-40">
-					<button id="next-btn" className="px-3">
+					<button id="next-btn" className="px-3" onClick={(e) => nextQuestion(e)}>
 						Next Question
 					</button>
 				</div>
