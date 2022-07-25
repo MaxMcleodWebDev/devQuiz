@@ -1,10 +1,24 @@
-import { questionData } from "../data/questionData";
 import { supabase } from "./supabaseClient";
+import { useEffect } from 'react'
+// import Router from 'next/router'
 
-let remianingQuestions = [...questionData]
 let selectedQuestions = []
 
-function createQuiz()  {
+async function createQuiz()  {
+	// const router = Router()
+	
+	let { data: questions, error } = await supabase
+	.from('questions')
+	.select('*')
+	.eq('subject', 'Maths')
+
+	// console.log(questions)
+
+	if (error) {
+		throw error;
+	}
+
+	let remianingQuestions = [...questions]
 
 	for(let i = 0; i < 10; i++){
 		// Generate random index
@@ -16,6 +30,8 @@ function createQuiz()  {
 	}
 }
 
+// console.log(selectedQuestions);
+
 createQuiz();
 
-export { selectedQuestions }
+// export { selectedQuestions }

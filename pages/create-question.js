@@ -53,7 +53,7 @@ export default function CreateQuestion() {
 
     return (
         <div>
-            <form onSubmit={(e) => test(e)} className='container mt-20'>
+            <form onSubmit={(e) => addQuestion(e)} className='container mt-20'>
                 <label htmlFor="subjects">Select the Questions Subject</label>
                 <select className='text-black' id="subjects" defaultValue="1" required onChange={(e) => setQuestionSubject(e.target.value)}>
                     <option className='test-black' value="1" disabled={true}>Select Subject</option>

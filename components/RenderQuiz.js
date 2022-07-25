@@ -1,92 +1,83 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { questionData } from "../data/questionData";
-import { selectedQuestions } from "../utils/questionsArray";
+import { useState } from "react";
+// import { selectedQuestions } from "../utils/questionsArray";
 
-export default function RenderQuiz({ questions }) {
+export default function RenderQuiz({ selectedQuestions, getData }) {
+
+	// console.log(selectedQuestions)
 
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [score, setScore] = useState(0);
 	const [quizState, setQuizState] = useState(false)
 
-	let remainingQuestions = [...questions]
-
-	const quizStart = () => {
+	const quizStart = async () => {
 		const quizContainer = document.getElementById('quiz-container')
 		const startButton = document.getElementById('start-btn')
+
+		await getData()
+
 		startButton.classList.add('hidden')
 		quizContainer.classList.remove('hidden')
-		createQuiz()
+
+		nextQuestion()
 	}
 
-	const createQuiz = () => {
-
-		let selectedQuestions = []
-
-		for (let i = 0; i < 10; i++) {
-			// Generate random index
-			let randomIndex = Math.floor(Math.random() * remainingQuestions.length)
-			// Add question to selected questions array
-			selectedQuestions.push(remainingQuestions[randomIndex])
-			// Remove question from remaining questions array to avoid duplication
-			remainingQuestions.splice(randomIndex, 1)
-		}
-
-		nextQuestion(selectedQuestions)
-	}
-
-	const nextQuestion = (question) => {
-
+	const nextQuestion = () => {
 		resetState()
-		if (questionIndex !== question.length) {
+
+		if (questionIndex !== selectedQuestions.length) {
 			setQuestionIndex(questionIndex + 1)
-		} else if (quizState == false) {
-			console.log('hello');
-			setQuizState((prevState) => !prevState)
-			document.getElementById('next-btn').disable = true
 		}
 
-		showQuestion(selectedQuestions[questionIndex])
+		showQuestion()
 	}
 
-	const showQuestion = (question) => {
+	const showQuestion = () => {
 		const questionTitle = document.getElementById('question-title')
 		const buttonContainer = document.getElementById('btn-container')
-		questionTitle.innerText = question.question
-		question.answers.forEach(answer => {
+
+		questionTitle.innerText = selectedQuestions[questionIndex].question
+
+		selectedQuestions[questionIndex].answers.forEach(answer => {
 			const button = document.createElement('button')
+
 			button.innerText = answer.answer
 			button.classList.add('btn')
+
 			if (answer.value) {
 				button.value = answer.value
 			}
+
 			button.addEventListener('click', selectAnswer)
 			buttonContainer.appendChild(button)
 		})
+
+		if (questionIndex + 1 == 10) {
+			setQuizState((prevState) => !prevState)
+			document.getElementById('next-btn').classList.add('hidden')
+		}
 	}
 
 	const resetState = () => {
 		const buttonContainer = document.getElementById('btn-container')
 		const nextButton = document.getElementById('next-btn')
+
 		nextButton.classList.add('hidden')
+
 		while (buttonContainer.firstChild) {
 			buttonContainer.removeChild(buttonContainer.firstChild)
 		}
 	}
 
+	const fullReset = () => {
+		document.getElementById('quiz-container').classList.add('hidden')
+		document.getElementById('end-quiz-btn').classList.add('hidden')
+		document.getElementById('end-quiz').classList.remove('hidden')
+	}
+
 	const selectAnswer = (e) => {
-
 		const nextBtn = document.getElementById('next-btn')
-
-		// if (e.target.value) {
-		// 	if (quizState == true) {
-		// 		console.log('thanks for playing')
-		// 	} else {
-		// 		setScore(score + 1)
-		// 	}
-		// } else {
-		// 	console.log('Wrong answer!')
-		// }
+		const btns = document.getElementById('btn-container').children
 
 		if (e.target.value) {
 			console.log('I am the right answer')
@@ -95,39 +86,22 @@ export default function RenderQuiz({ questions }) {
 			console.log('I am not the right answer')
 		}
 
-		nextBtn.classList.remove('hidden')
+		for (let i = 0; i < btns.length; i++) {
+			btns[i].disabled = true;
+		}
 
+		if (questionIndex + 1 < 10) {
+			nextBtn.classList.remove('hidden')
+		} else {
+			document.getElementById('end-quiz-btn').classList.remove('hidden')
+		}
 	}
-
-	// const nextQuestion = () => {
-	// 	if (questionIndex !== selectedQuestions.length) {
-	// 		setQuestionIndex(questionIndex + 1);
-	// 		setAnswerIndex(answerIndex + 1);
-	// 	} else if (quizState == false) {
-	// 		setQuizState((prevState) => !prevState)
-	// 		document.getElementById('trueButton').disable = true;
-	// 	}
-	// };
-
-	// const answerSubmit = (e) => {
-	// 	if (e.target.textContent == "True Value") {
-	// 		if (quizState === true) {
-	// 			console.log("Thanks for playing!");
-	// 		} else {
-	// 			setScore(score + 1);
-	// 			nextQuestion()
-	// 		}
-	// 	} else {
-	// 		nextQuestion();
-	// 	}
-	// };
 
 	return (
 		<div className="container-question">
 			<button id='start-btn' onClick={() => quizStart()}>Start</button>
 			<div id='quiz-container' className=" text-center hidden">
 				<p className="m-3 mt-20 text-center">{`Question ${questionIndex} of 10`}</p>
-				<p className="mt-5">Current score: {score}/10</p>
 				<div className="relative">
 					<div className="text-center">
 						<div>
@@ -135,15 +109,26 @@ export default function RenderQuiz({ questions }) {
 								Question Title
 							</h2>
 						</div>
-						<div id='btn-container' className="mt-16 grid grid-cols-2 m-auto">
+						<div id='btn-container' className="mt-16 grid grid-cols-2 m-auto gap-4">
 						</div>
 					</div>
 				</div>
-				<div className="mt-40">
-					<button id="next-btn" className="px-3" onClick={(e) => nextQuestion(e)}>
+				<div className="mt-20">
+					<button id="next-btn" className="px-3" onClick={nextQuestion}>
 						Next Question
 					</button>
+					<button id="end-quiz-btn" className="hidden" onClick={fullReset}>
+						Finish Quiz
+					</button>
 				</div>
+			</div>
+			<div id="end-quiz" className="hidden">
+				<p>{score == 10 ? `Excellent job, your score was ${score}/10! You got every question right! :)` : score >= 7 ? `Very well done, your socre was ${score}/10. Keep it up!` : score >= 5 ? `Your score was ${score}/10. Doing good, keep practicing! :)` : `Your score was ${score}/10. Don't feel discouraged, you can do better! :)`}</p>
+				<a href="/">
+					<button>
+						Retry Quiz
+					</button>
+				</a>
 			</div>
 		</div>
 	);
