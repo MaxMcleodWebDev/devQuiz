@@ -68,14 +68,14 @@ export default function Account({ session }) {
 
   return (
     <div className="form-widget">
-        <Avatar
-            url={avatar_url}
-            size={150}
-            onUpload={(url) => {
-                setAvatarUrl(url)
-                updateProfile({ username, website, avatar_url: url })
-            }}
-        />
+      <Avatar
+        url={avatar_url}
+        size={150}
+        onUpload={(url) => {
+          setAvatarUrl(url)
+          updateProfile({ username, website, avatar_url: url })
+        }}
+      />
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -113,6 +113,9 @@ export default function Account({ session }) {
         <button className="button block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
+        <a href="/">
+          <button className='button block mt-4'>Return to Menu</button>
+        </a>
       </div>
     </div>
   )

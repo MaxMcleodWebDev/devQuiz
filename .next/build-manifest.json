@@ -30,10 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/create-question": [
+    "/quizz-list": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/create-question.js"
+      "static/chunks/pages/quizz-list.js"
     ],
     "/quizzes/[name]": [
       "static/chunks/webpack.js",

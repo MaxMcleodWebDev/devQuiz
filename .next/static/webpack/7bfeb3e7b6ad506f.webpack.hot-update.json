@@ -1,0 +1,1 @@
+{"c":["pages/_app","pages/quizzes/[name]","webpack"],"r":["pages/quizz-list"],"m":["./components/Card.js","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fquizz-list&absolutePagePath=%2Fhome%2Fcloudyman%2Fprojects%2FclientProjects%2Fcengiz-project%2FdevQuiz%2Fpages%2Fquizz-list.js!","./pages/quizz-list.js"]}
